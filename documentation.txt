@@ -1,0 +1,14 @@
+Step 1 : first go to heart_disease_model folder and in this folder run file 
+            In this we use conda then first activate conda 
+            for conda activate --> open cmd and go to the file directory
+            and conda activate --> conda activate venv/
+            Run it using : python predict.py
+            In this we find api :  * Running on http://127.0.0.1:5000
+
+Step 2 : Go to the heart-disease-prediction-backend
+            Run it using : npm run dev
+            for backend api: 🚀 Server running on http://localhost:3000
+
+Step 3 : Go to the heart-disease-prediction-frontend 
+            Run it using : ng s 
+            In this we find url :   ➜  Local:   http://localhost:4200/

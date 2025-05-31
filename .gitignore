@@ -1,0 +1,25 @@
+# Python
+heart_disease_models/venv/
+__pycache__/
+*.pyc
+*.pkl
+.env
+
+# Node.js
+heart-disease-prediction-backend/node_modules/
+heart-disease-prediction-backend/.env
+
+# Frontend
+heart-disease-prediction-frontend2/dist/
+heart-disease-prediction-frontend2/build/
+heart-disease-prediction-frontend2/node_modules
+heart-disease-prediction-frontend2/npm-debug.log
+heart-disease-prediction-frontend2/yarn-error.log
+heart-disease-prediction-frontend2/.angular/cache
+
+
+
+# OS/Editor
+.DS_Store
+.vscode/
+.idea/
