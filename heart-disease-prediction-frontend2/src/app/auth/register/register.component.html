@@ -1,0 +1,118 @@
+<div class="container vh-100 d-flex justify-content-center align-items-center ptHeader">
+    <div class="row w-75 shadow-lg rounded overflow-hidden">
+      
+      <!-- Left Section -->
+      <div class="col-md-6 bg-primary text-white text-center d-flex flex-column justify-content-center p-4">
+        <h2>Heart-Disease</h2>
+        <img src="assets/emojis.com doctor-at-a-computer-communicating-with-a-patient.png" alt="">
+        <p></p>
+      </div>
+  
+      <!-- Right Section -->
+      <div class="col-md-6 p-4 bg-white">
+        <h3 class="mb-3">Create Account</h3>
+        <form [formGroup]="signUPForm" (ngSubmit)="onSubmit()">
+            
+            <div class="mb-3">
+              <input 
+                type="text" 
+                class="form-control" 
+                placeholder="Enter your name" 
+                formControlName="name"
+              />
+              <div *ngIf="signUPForm.get('name')?.invalid && signUPForm.get('name')?.touched" class="text-danger small">
+                Name is required.
+              </div>
+            </div>
+            <div class="mb-3">
+              <input 
+                type="text" 
+                class="form-control" 
+                placeholder="Enter your email" 
+                formControlName="email"
+              />
+              <div *ngIf="signUPForm.get('email')?.invalid && signUPForm.get('email')?.touched" class="text-danger small">
+                Email is required.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <input 
+                type="number" 
+                class="form-control" 
+                placeholder="Enter your Age" 
+                formControlName="age"
+              />
+              <div *ngIf="signUPForm.get('age')?.invalid && signUPForm.get('age')?.touched" class="text-danger small">
+                Age is required.
+              </div>
+            </div>
+
+            <div class="mb-3">
+                <select class="form-control" name="gender" id="gender" formControlName="gender">
+                    <option value="" disabled>Select gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+              <div *ngIf="signUPForm.get('gender')?.invalid && signUPForm.get('gender')?.touched" class="text-danger small">
+                Gender is required.
+              </div>
+            </div>
+            
+            <div class="mb-3">
+                <input 
+                  type="number" 
+                  class="form-control" 
+                  placeholder="Enter your Phone Number" 
+                  formControlName="phone"
+                />
+                <div *ngIf="signUPForm.get('phone')?.invalid && signUPForm.get('phone')?.touched" class="text-danger small">
+                  Phone Number is required.
+                </div>
+            </div>
+
+            <div class="mb-3">
+              <select class="form-control" name="role" id="role" formControlName="role">
+                  <option value="" disabled>Select your role</option>
+                  <option value="patient">Patient</option>
+                  <option value="doctor">Doctor</option>
+                  <option value="admin">Admin</option>
+              </select>
+            <div *ngIf="signUPForm.get('role')?.invalid && signUPForm.get('role')?.touched" class="text-danger small">
+              role is required.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <input 
+              type="password" 
+              class="form-control" 
+              placeholder="Password" 
+              formControlName="password"
+            />
+            <div *ngIf="signUPForm.get('password')?.invalid && signUPForm.get('password')?.touched" class="text-danger small">
+              Password is required.
+            </div>
+          </div>
+  
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="rememberMe" formControlName="rememberMe" />
+              <label class="form-check-label" for="rememberMe">Remember me</label>
+            </div>
+          </div>
+  
+          <button type="submit" class="btn btn-primary w-100" [disabled]="signUPForm.invalid">
+            Sign UP
+          </button>
+        </form>
+  
+        <p class="text-center mt-3">
+          Already have an account? <a routerLink="/auth/" class="text-primary">Sign IN</a>
+        </p>
+      </div>
+  
+    </div>
+  </div>
+  

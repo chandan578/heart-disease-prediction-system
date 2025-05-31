@@ -1,0 +1,180 @@
+<div class="container patient-summary-container p-4 bg-light rounded-3 shadow-sm">
+    <!-- Patient Info Section -->
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-start mb-4 pb-3 border-bottom">
+      <div class="patient-basic-info mb-3 mb-md-0">
+        <h2 class="h4 mb-2">{{patientName}}, {{patientAge}}, {{patientGender}}</h2>
+        <div class="d-flex flex-wrap gap-3">
+          <div><strong>BP:</strong> {{bloodPressure}}</div>
+          <div><strong>HR:</strong> {{heartRate}} bpm</div>
+          <div><strong>Weight:</strong> {{weight}} kg</div>
+        </div>
+      </div>
+  
+      <!-- <div class="next-appointment bg-info bg-opacity-10 p-3 rounded text-md-end" *ngIf="nextAppointment">
+        <h3 class="h5 mb-1">Next Appointment</h3>
+        <p class="mb-1">{{nextAppointmentDate | date:'mediumDate'}}</p>
+        <p class="mb-0">{{nextAppointmentLocation}}</p>
+      </div> -->
+    </div>
+  
+    <!-- Health Overview Section -->
+    <div class="row g-4 mb-4">
+      <!-- Risk Score -->
+      <div class="col-lg-4">
+        <div class="card h-100 border-0" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
+          <div class="card-body p-4 d-flex flex-column">
+            <!-- Header -->
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h3 class="h5 mb-0 text-primary">
+                <i class="bi bi-heart-pulse me-2"></i>Heart Risk Assessment
+              </h3>
+              <span class="badge bg-white text-dark border border-primary">
+                <i class="bi bi-calendar-check me-1"></i>Latest
+              </span>
+            </div>
+            
+            <!-- Gauge Visualization -->
+            <div class="gauge-wrapper mx-auto my-3 position-relative" style="width: 200px; height: 200px;">
+              <!-- Background Circle -->
+              <div class="position-absolute rounded-circle" 
+                   style="width: 100%; height: 100%; background: #f0f3f5;"></div>
+              
+              <!-- Main Gauge -->
+              <div class="gauge position-absolute" 
+                   [style.--percentage]="heartDiseaseRiskScore + '%'"
+                   [class]="'risk-' + riskCategory">
+                <div class="gauge-body"></div>
+              </div>
+              
+              <!-- Inner Content -->
+              <div class="position-absolute d-flex flex-column justify-content-center align-items-center" 
+                   style="width: 70%; height: 70%; top: 15%; left: 15%; background: white; border-radius: 50%; box-shadow: inset 0 4px 8px rgba(0,0,0,0.05);">
+                <span class="display-4 fw-bold text-dark">{{heartDiseaseRiskScore}}%</span>
+                <span class="badge mt-2 px-3 py-1 fw-normal" 
+                      [class.bg-success]="riskCategory === 'low'"
+                      [class.bg-warning]="riskCategory === 'medium'"
+                      [class.bg-danger]="riskCategory === 'high'">
+                  {{riskCategory | titlecase}} Risk
+                </span>
+              </div>
+            </div>
+            
+            <!-- Risk Scale -->
+            <div class="risk-scale mt-2 px-4">
+              <div class="d-flex justify-content-between mb-1 small text-muted">
+                <span>0%</span>
+                <span>100%</span>
+              </div>
+              <div class="progress" style="height: 6px;">
+                <div class="progress-bar bg-secondary" role="progressbar" 
+                     [style.width]="heartDiseaseRiskScore + '%'"></div>
+              </div>
+            </div>
+            
+            <!-- Detailed Risk Info -->
+            <div class="mt-4 pt-3 border-top">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="text-muted">Risk Classification:</span>
+                <span class="fw-bold" 
+                      [class.text-success]="riskCategory === 'low'"
+                      [class.text-warning]="riskCategory === 'medium'"
+                      [class.text-danger]="riskCategory === 'high'">
+                  {{riskCategory | uppercase}}
+                </span>
+              </div>
+              
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="text-muted">Prediction Confidence:</span>
+                <span class="fw-bold">{{heartDiseaseRiskScore}}%</span>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+  
+      <!-- Metrics Trend -->
+      <div class="col-lg-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body">
+            <h3 class="h5 mb-3 text-primary">Key Metrics Trend</h3>
+            <div class="chart-container" style="height: 250px;">
+              <canvas baseChart
+                [data]="lineChartData"
+                [options]="lineChartOptions"
+                [type]="'line'">
+              </canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Status Indicators -->
+      <div class="col-lg-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body">
+            <h3 class="h5 mb-3 text-primary">Quick Status</h3>
+            <div class="d-flex flex-column gap-2">
+              <div class="indicator p-2 rounded" 
+                   *ngFor="let indicator of statusIndicators"
+                   [class.bg-success-subtle]="indicator.status === 'normal'" 
+                   [class.bg-danger-subtle]="indicator.status === 'abnormal'">
+                {{indicator.label}}: 
+                <span class="badge ms-2"
+                      [class.text-bg-success]="indicator.status === 'normal'"
+                      [class.text-bg-danger]="indicator.status === 'abnormal'">
+                  {{indicator.status | uppercase}}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Action Cards Section -->
+    <div class="row g-3 mb-4">
+      <div class="col-md-4">
+        <button class="action-card card w-100 h-100 border-0 shadow-sm text-start p-0 btn btn-outline-light" (click)="enterSymptoms()">
+          <div class="card-body">
+            <h3 class="h5 mb-0">Enter Today's Symptoms</h3>
+          </div>
+        </button>
+      </div>
+      <div class="col-md-4">
+        <button class="action-card card w-100 h-100 border-0 shadow-sm text-start p-0 btn btn-outline-light" (click)="bookConsultation()">
+          <div class="card-body">
+            <h3 class="h5 mb-0">Book Consultation</h3>
+          </div>
+        </button>
+      </div>
+      <div class="col-md-4">
+        <button class="action-card card w-100 h-100 border-0 shadow-sm text-start p-0 btn btn-outline-light" (click)="viewLatestReport()">
+          <div class="card-body">
+            <h3 class="h5 mb-0">View Latest Report</h3>
+          </div>
+        </button>
+      </div>
+    </div>
+  
+    <!-- Alerts Section -->
+    <div class="card border-0 shadow-sm">
+      <div class="card-body">
+        <h3 class="h5 mb-3">Alerts & Notifications</h3>
+        <div class="alert-list">
+          <div class="alert-item d-flex align-items-start gap-3 py-2 border-bottom" *ngFor="let alert of alerts">
+            <div class="alert-icon fs-5" [ngSwitch]="alert.type">
+              <span *ngSwitchCase="'medication'">💊</span>
+              <span *ngSwitchCase="'test'">🩺</span>
+              <span *ngSwitchCase="'message'">✉️</span>
+            </div>
+            <div class="alert-content flex-grow-1">
+              <strong class="d-block">{{alert.title}}</strong>
+              <p class="mb-1">{{alert.message}}</p>
+              <small class="text-muted">{{alert.time | date:'shortTime'}}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

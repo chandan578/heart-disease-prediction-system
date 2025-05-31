@@ -1,0 +1,214 @@
+<div class="container-xxl flex-grow-1 grid-list-page">
+  <div class="container row mt-5">
+    <div class="image col-md-6">
+      <img src="assets/a-heart-anatomy.png" alt="" height="500px">
+
+    </div>
+    <div class=" p-2 col-md-6">
+      <form [formGroup]="predictionForm" (ngSubmit)="submitForm()" class=" p-4 border rounded shadow bg-light">
+        <h3 class="text-center mb-4">Heart Disease Prediction</h3>
+
+        <!-- Age Field -->
+        <div class="row align-items-center mb-3">
+          <label class="col-sm-4 col-form-label text-end">Weight:</label>
+          <div class="col-sm-8 d-flex align-items-center">
+            <input type="number" class="form-control" formControlName="weight" placeholder="Enter the weight" />
+            <i class="bi bi-info-circle ms-2" matTooltip="Enter your weight in kg."
+              matTooltipClass="custom-tooltip" matTooltipPosition="above">
+            </i>
+          </div>
+          <div *ngIf="predictionForm.get('weight')?.invalid && predictionForm.get('weight')?.touched" class="text-danger col-sm-8 offset-sm-4">
+            weight is required.
+          </div>
+        </div>
+
+        <!-- Chest Pain Type (CP) Field -->
+        <div class="row mb-3">
+          <label class="col-sm-4 col-form-label text-end">Chest Pain Type (CP):</label>
+          <div class="col-sm-8 d-flex align-items-center">
+            <select class="form-select" formControlName="cp">
+              <option value="" disabled>Select chest pain type</option>
+              <option value="1">Typical angina</option>
+              <option value="2">Atypical angina</option>
+              <option value="3">Non-anginal pain</option>
+              <option value="4">Asymptomatic</option>
+            </select>
+            <i class="bi bi-info-circle ms-2" matTooltip="choose your chest pain type as given options."
+              matTooltipClass="custom-tooltip" matTooltipPosition="above">
+            </i>
+          </div>
+          <div *ngIf="predictionForm.get('cp')?.invalid && predictionForm.get('cp')?.touched" class="text-danger col-sm-8 offset-sm-4">
+            Chest Pain Type is required.
+          </div>
+        </div>
+
+        <!-- Resting Blood Pressure Field -->
+        <div class="row mb-3">
+          <label class="col-sm-4 col-form-label text-end">Resting Blood Pressure:</label>
+          <div class="col-sm-8 d-flex align-items-center">
+            <input type="number" class="form-control" formControlName="trestbps" placeholder="Enter your blood pressure" />
+            <i class="bi bi-info-circle ms-2" matTooltip="Enter your Blood Pressure that must be between 90 and 200."
+              matTooltipClass="custom-tooltip" matTooltipPosition="above">
+            </i>
+          </div>
+          <div *ngIf="predictionForm.get('trestbps')?.invalid && predictionForm.get('trestbps')?.touched" class="text-danger col-sm-8 offset-sm-4">
+            Resting Blood Pressure is required and must be between 90 and 200.
+          </div>
+        </div>
+
+        <!-- Cholesterol Field -->
+        <div class="row mb-3">
+          <label class="col-sm-4 col-form-label text-end">Cholesterol:</label>
+          <div class="col-sm-8 d-flex align-items-center">
+            <input type="number" class="form-control" formControlName="chol" placeholder="Enter your cholesterol level" />
+            <i class="bi bi-info-circle ms-2" matTooltip="Enter your Cholesterol level and that must be between 126 and 564."
+              matTooltipClass="custom-tooltip" matTooltipPosition="above">
+            </i>
+          </div>
+          <div *ngIf="predictionForm.get('chol')?.invalid && predictionForm.get('chol')?.touched" class="text-danger col-sm-8 offset-sm-4">
+            Cholesterol is required and must be between 126 and 564.
+          </div>
+        </div>
+
+        <!-- Fasting Blood Sugar Field -->
+        <div class="row mb-3">
+          <label class="col-sm-4 col-form-label text-end">Fasting Blood Sugar:</label>
+          <div class="col-sm-8 d-flex align-items-center">
+            <select class="form-select" formControlName="fbs">
+              <option value="" disabled>Do you have diabetes?</option>
+              <option value="1">Yes</option>
+              <option value="0">No</option>
+            </select>
+            <i class="bi bi-info-circle ms-2" matTooltip="Choose you have suffer from diabetes or not..."
+              matTooltipClass="custom-tooltip" matTooltipPosition="above">
+            </i>
+          </div>
+          <div *ngIf="predictionForm.get('fbs')?.invalid && predictionForm.get('fbs')?.touched" class="text-danger col-sm-8 offset-sm-4">
+            Diabetes is required.
+          </div>
+        </div>
+
+        <!-- Resting ECG Field -->
+        <div class="row mb-3">
+          <label class="col-sm-4 col-form-label text-end">Resting ECG:</label>
+          <div class="col-sm-8 d-flex align-items-center">
+            <select class="form-select" formControlName="restecg">
+              <option value="" disabled>Select your heart ST value </option>
+              <option value="0">Normal</option>
+              <option value="1">ST-T wave abnormality</option>
+              <option value="2">Left ventricular hypertrophy</option>
+            </select>
+            <i class="bi bi-info-circle ms-2" matTooltip="Choose your heart ST value."
+              matTooltipClass="custom-tooltip" matTooltipPosition="above">
+            </i>
+          </div>
+          <div *ngIf="predictionForm.get('restecg')?.invalid && predictionForm.get('restecg')?.touched" class="text-danger col-sm-8 offset-sm-4">
+            Resting ECG is required.
+          </div>
+        </div>
+
+        <!-- Max Heart Rate Field -->
+        <div class="row mb-3">
+          <label class="col-sm-4 col-form-label text-end">Max Heart Rate:</label>
+          <div class="col-sm-8 d-flex align-items-center">
+            <input type="number" class="form-control" formControlName="thalach" placeholder="Enter your max heart rate"/>
+            <i class="bi bi-info-circle ms-2" matTooltip="Enter your heart rate that must be between 71 to 202."
+              matTooltipClass="custom-tooltip" matTooltipPosition="above">
+            </i>
+          </div>
+          <div *ngIf="predictionForm.get('thalach')?.invalid && predictionForm.get('thalach')?.touched" class="text-danger col-sm-8 offset-sm-4">
+            Max Heart Rate is required and must be between 71 and 202.
+          </div>
+        </div>
+
+        <!-- Exercise-Induced Angina Field -->
+        <div class="row mb-3">
+          <label class="col-sm-4 col-form-label text-end">Exercise-Induced Angina:</label>
+          <div class="col-sm-8 d-flex align-items-center">
+            <select class="form-select" formControlName="exang">
+              <option value="" disabled>Do you have exercise??</option>
+              <option value="1">Yes</option>
+              <option value="0">No</option>
+            </select>
+            <i class="bi bi-info-circle ms-2" matTooltip="Choose your excerise or not..."
+              matTooltipClass="custom-tooltip" matTooltipPosition="above">
+            </i>
+          </div>
+          <div *ngIf="predictionForm.get('exang')?.invalid && predictionForm.get('exang')?.touched" class="text-danger col-sm-8 offset-sm-4">
+            Exercise-Induced Angina is required.
+          </div>
+        </div>
+
+        <!-- Oldpeak Field -->
+        <div class="row mb-3">
+          <label class="col-sm-4 col-form-label text-end">Oldpeak:</label>
+          <div class="col-sm-8 d-flex align-items-center">
+            <input type="number" step="0.1" class="form-control" formControlName="oldpeak" placeholder="Enter your oldpeak value" />
+            <i class="bi bi-info-circle ms-2" matTooltip="Enter your oldpeak value."
+              matTooltipClass="custom-tooltip" matTooltipPosition="above">
+            </i>
+          </div>
+          <div *ngIf="predictionForm.get('oldpeak')?.invalid && predictionForm.get('oldpeak')?.touched" class="text-danger col-sm-8 offset-sm-4">
+            Oldpeak is required and must be between 0 and 6.2.
+          </div>
+        </div>
+
+        <!-- Slope Field -->
+        <div class="row mb-3">
+          <label class="col-sm-4 col-form-label text-end">Slope:</label>
+          <div class="col-sm-8 d-flex align-items-center">
+            <select class="form-select" formControlName="slope">
+              <option value="" disabled>Choose your slope</option>
+              <option value="1">Upsloping</option>
+              <option value="2">Flat</option>
+              <option value="3">Downsloping</option>
+            </select>
+            <i class="bi bi-info-circle ms-2" matTooltip="Choose your correct slope."
+              matTooltipClass="custom-tooltip" matTooltipPosition="above">
+            </i>
+          </div>
+          <div *ngIf="predictionForm.get('slope')?.invalid && predictionForm.get('slope')?.touched" class="text-danger col-sm-8 offset-sm-4">
+            Slope is required.
+          </div>
+        </div>
+
+        <!-- Major Vessels Field -->
+        <div class="row mb-3">
+          <label class="col-sm-4 col-form-label text-end">Major Vessels:</label>
+          <div class="col-sm-8 d-flex align-items-center">
+            <input type="number" class="form-control" formControlName="ca" placeholder="Enter your major vessels"/>
+            <i class="bi bi-info-circle ms-2" matTooltip="enter your major vessels between 0 and ."
+              matTooltipClass="custom-tooltip" matTooltipPosition="above">
+            </i>
+          </div>
+          <div *ngIf="predictionForm.get('ca')?.invalid && predictionForm.get('ca')?.touched" class="text-danger col-sm-8 offset-sm-4">
+            Major Vessels is required and must be between 0 and 4.
+          </div>
+        </div>
+
+        <!-- Thalassemia Field -->
+        <div class="row mb-3">
+          <label class="col-sm-4 col-form-label text-end">Thalassemia:</label>
+          <div class="col-sm-8 d-flex align-items-center">
+            <select class="form-select" formControlName="thal">
+              <option value="" disabled>Select your Thakassemia </option>
+              <option value="3">Normal</option>
+              <option value="6">Fixed defect</option>
+              <option value="7">Reversible defect</option>
+            </select>
+            <i class="bi bi-info-circle ms-2" matTooltip="Choose your Thalassemia ."
+              matTooltipClass="custom-tooltip" matTooltipPosition="above">
+            </i>
+          </div>
+          <div *ngIf="predictionForm.get('thal')?.invalid && predictionForm.get('thal')?.touched" class="text-danger col-sm-8 offset-sm-4">
+            Thalassemia is required.
+          </div>
+        </div>
+
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary px-4">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

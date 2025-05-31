@@ -1,0 +1,7 @@
+<app-common-header *ngIf="!authService.isLoggedIn()"></app-common-header>
+<app-admin-header *ngIf="authService.isLoggedIn() && authService.getUserRole() === 'admin'"></app-admin-header>
+<app-doctor-header *ngIf="authService.isLoggedIn() && authService.getUserRole() === 'doctor'"></app-doctor-header>
+<app-patient-header *ngIf="authService.isLoggedIn() && authService.getUserRole() === 'patient'"></app-patient-header>
+
+<router-outlet></router-outlet>
+

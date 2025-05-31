@@ -1,0 +1,46 @@
+.navbar {
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+  .navbar-brand {
+    font-size: 24px;
+  }
+  
+  .navbar-nav .nav-link {
+    padding-right: 15px;
+    color: white !important;
+  }
+  
+  .navbar-nav .nav-link:hover {
+    color: #ddd !important;
+  }
+  
+  .dropdown-menu {
+    background-color: black;
+  }
+  
+  .dropdown-menu .dropdown-item {
+    color: white;
+  }
+  
+  .dropdown-menu .dropdown-item:hover {
+    background-color: #333;
+  }
+  
+
+  /* In your component's CSS or global styles.css */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* Ensures header stays above other content */
+  background: white; /* Add background color */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Optional shadow */
+}
+
+/* Add padding to the main content to prevent hiding under header */
+.main-content {
+  padding-top: 60px; /* Should match header height */
+}
